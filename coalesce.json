@@ -1,0 +1,16 @@
+{
+  "webProject": {
+    "projectFile": "./CyberForceWeb.Web/CyberForceWeb.Web.csproj"
+  },
+  "dataProject": {
+    "projectFile": "./CyberForceWeb.Data/CyberForceWeb.Data.csproj"
+  },
+
+  "rootGenerator": "Vue",
+
+  "generatorConfig": {
+    "Scripts": {
+      "targetDirectory": "../src"
+    }
+  }
+}
