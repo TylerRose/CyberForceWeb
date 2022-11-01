@@ -25,7 +25,7 @@ jobs:
       - name: Restore and Install npm Packages
         run: |
           cd ./CyberForceWeb.Web
-          npm ci
+          npm i
           npm run build
         shell: pwsh
           
