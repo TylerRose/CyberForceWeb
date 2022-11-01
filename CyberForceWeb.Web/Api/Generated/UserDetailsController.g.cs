@@ -20,54 +20,54 @@ using System.Threading.Tasks;
 
 namespace CyberForceWeb.Web.Api
 {
-    [Route("api/ApplicationUser")]
+    [Route("api/UserDetails")]
     [Authorize]
     [ServiceFilter(typeof(IApiActionFilter))]
-    public partial class ApplicationUserController
-        : BaseApiController<CyberForceWeb.Data.Models.ApplicationUser, ApplicationUserDtoGen, CyberForceWeb.Data.AppDbContext>
+    public partial class UserDetailsController
+        : BaseApiController<CyberForceWeb.Data.Models.UserDetails, UserDetailsDtoGen, CyberForceWeb.Data.AppDbContext>
     {
-        public ApplicationUserController(CyberForceWeb.Data.AppDbContext db) : base(db)
+        public UserDetailsController(CyberForceWeb.Data.AppDbContext db) : base(db)
         {
-            GeneratedForClassViewModel = ReflectionRepository.Global.GetClassViewModel<CyberForceWeb.Data.Models.ApplicationUser>();
+            GeneratedForClassViewModel = ReflectionRepository.Global.GetClassViewModel<CyberForceWeb.Data.Models.UserDetails>();
         }
 
         [HttpGet("get/{id}")]
         [Authorize]
-        public virtual Task<ItemResult<ApplicationUserDtoGen>> Get(
+        public virtual Task<ItemResult<UserDetailsDtoGen>> Get(
             string id,
             DataSourceParameters parameters,
-            IDataSource<CyberForceWeb.Data.Models.ApplicationUser> dataSource)
+            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource)
             => GetImplementation(id, parameters, dataSource);
 
         [HttpGet("list")]
         [Authorize]
-        public virtual Task<ListResult<ApplicationUserDtoGen>> List(
+        public virtual Task<ListResult<UserDetailsDtoGen>> List(
             ListParameters parameters,
-            IDataSource<CyberForceWeb.Data.Models.ApplicationUser> dataSource)
+            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource)
             => ListImplementation(parameters, dataSource);
 
         [HttpGet("count")]
         [Authorize]
         public virtual Task<ItemResult<int>> Count(
             FilterParameters parameters,
-            IDataSource<CyberForceWeb.Data.Models.ApplicationUser> dataSource)
+            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource)
             => CountImplementation(parameters, dataSource);
 
         [HttpPost("save")]
         [Authorize]
-        public virtual Task<ItemResult<ApplicationUserDtoGen>> Save(
-            ApplicationUserDtoGen dto,
+        public virtual Task<ItemResult<UserDetailsDtoGen>> Save(
+            UserDetailsDtoGen dto,
             [FromQuery] DataSourceParameters parameters,
-            IDataSource<CyberForceWeb.Data.Models.ApplicationUser> dataSource,
-            IBehaviors<CyberForceWeb.Data.Models.ApplicationUser> behaviors)
+            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource,
+            IBehaviors<CyberForceWeb.Data.Models.UserDetails> behaviors)
             => SaveImplementation(dto, parameters, dataSource, behaviors);
 
         [HttpPost("delete/{id}")]
         [Authorize]
-        public virtual Task<ItemResult<ApplicationUserDtoGen>> Delete(
+        public virtual Task<ItemResult<UserDetailsDtoGen>> Delete(
             string id,
-            IBehaviors<CyberForceWeb.Data.Models.ApplicationUser> behaviors,
-            IDataSource<CyberForceWeb.Data.Models.ApplicationUser> dataSource)
+            IBehaviors<CyberForceWeb.Data.Models.UserDetails> behaviors,
+            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource)
             => DeleteImplementation(id, new DataSourceParameters(), dataSource, behaviors);
     }
 }

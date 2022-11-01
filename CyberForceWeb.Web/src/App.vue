@@ -1,47 +1,101 @@
 <template>
   <v-app id="vue-app">
-    <v-navigation-drawer v-model="drawer" app clipped>
-      <v-list>
-        <v-list-item link to="/">
-          <v-list-item-action>
-            <v-icon>fas fa-home</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+    <v-app-bar app color="primary" dark dense clipped-left height="100px">
+      <router-link to="/">
+        <v-sheet width="300" color="grey">
+          <v-img :src="require('@/assets/sole-zonsolisenergy.png')" />
+        </v-sheet>
+      </router-link>
 
-        <v-list-item link to="/coalesce-example">
-          <v-list-item-action>
-            <v-icon>fas fa-palette</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Coalesce Example</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+      <v-toolbar-title class="px-4">
+        <router-link
+          to="/contact"
+          style="text-decoration: none"
+          class="white--text"
+        >
+          <v-btn class="pa-8" outlined> Contact Us</v-btn>
+        </router-link>
+      </v-toolbar-title>
 
-    <v-app-bar app color="primary" dark dense clipped-left>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>
-        <router-link to="/" class="white--text" style="text-decoration: none">
-          Coalesce Vue Template
+      <v-toolbar-title class="px-4">
+        <router-link
+          to="/Manufacturing"
+          style="text-decoration: none"
+          class="white--text"
+        >
+          <v-btn class="pa-8" outlined> Manufacturing</v-btn>
+        </router-link>
+      </v-toolbar-title>
+
+      <v-toolbar-title class="px-4">
+        <router-link
+          to="/SolarGeneration"
+          style="text-decoration: none"
+          class="white--text"
+        >
+          <v-btn class="pa-8" outlined> Solar Generation</v-btn>
+        </router-link>
+      </v-toolbar-title>
+
+      <v-toolbar-title class="px-4">
+        <router-link
+          to="/Login"
+          style="text-decoration: none"
+          class="white--text"
+        >
+          <v-btn class="pa-8" outlined> Login</v-btn>
         </router-link>
       </v-toolbar-title>
     </v-app-bar>
 
-    <v-main>
+    <v-main class="ma-8">
       <transition
         name="router-transition"
         mode="out-in"
         appear
         @enter="routerViewOnEnter"
       >
-        <!-- https://stackoverflow.com/questions/52847979/what-is-router-view-key-route-fullpath -->
         <router-view ref="routerView" :key="$route.path" />
       </transition>
     </v-main>
+    <v-footer height="100px" class="ma-3 pa-3">
+      <v-row justify="center" align="center">
+        <v-toolbar-title class="px-8">
+          <v-sheet width="300" color="grey">
+            <v-img :src="require('@/assets/vitavehiculum.png')"
+          </v-sheet>
+        </v-toolbar-title>
+        <v-toolbar-title class="px-8">
+          <router-link to="/contact" style="text-decoration: none">
+            <v-btn class="pa-8" outlined> Subscribe To Newsletter</v-btn>
+          </router-link>
+        </v-toolbar-title>
+        <v-toolbar-title class="px-8">
+          <v-card flat>
+            <v-sheet class="pa-5" color="#F5F5F5">
+              <v-row>
+                <router-link to="/contact" style="text-decoration: none">
+                  Contact Us
+                </router-link>
+              </v-row>
+              <v-row>
+                <router-link to="/Manufacturing" style="text-decoration: none">
+                  Manufacturing
+                </router-link>
+              </v-row>
+              <v-row>
+                <router-link
+                  to="/SolarGeneration"
+                  style="text-decoration: none"
+                >
+                  Solar Generation
+                </router-link>
+              </v-row>
+            </v-sheet>
+          </v-card>
+        </v-toolbar-title>
+      </v-row>
+    </v-footer>
   </v-app>
 </template>
 
@@ -55,7 +109,6 @@ import { Component } from "vue-property-decorator";
 export default class App extends Vue {
   drawer: boolean | null = null;
   routeComponent: Vue | null = null;
-
   get routeMeta() {
     if (!this.$route || this.$route.name === null) return null;
 

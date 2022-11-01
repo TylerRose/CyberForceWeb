@@ -13,10 +13,24 @@ export default new Router({
       component: () => import("./views/Home.vue"),
     },
     {
-      path: "/coalesce-example",
-      name: "coalesce-example",
-      component: () => import("./views/CoalesceExample.vue"),
-      props: { title: "Coalesce Example" },
+      path: "/Contact",
+      name: "home",
+      component: () => import("./views/Contact.vue"),
+    },
+    {
+      path: "/Manufacturing",
+      name: "home",
+      component: () => import("./views/Manufacturing.vue"),
+    },
+    {
+      path: "/SolarGeneration",
+      name: "home",
+      component: () => import("./views/SolarGeneration.vue"),
+    },
+    {
+      path: "/Login",
+      name: "home",
+      component: () => import("./views/Login.vue"),
     },
 
     // Coalesce admin routes

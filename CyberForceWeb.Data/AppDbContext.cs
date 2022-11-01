@@ -1,13 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using CyberForceWeb.Data.Models;
 using IntelliTect.Coalesce;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CyberForceWeb.Data;
 
 [Coalesce]
-public class AppDbContext : DbContext
+public class AppDbContext : IdentityDbContext<ApplicationUser>
 {
-    public DbSet<ApplicationUser> ApplicationUsers => Set<ApplicationUser>();
+    public DbSet<UserDetails> UserDetails => Set<UserDetails>();
 
     public AppDbContext()
     {
@@ -36,7 +37,8 @@ public class AppDbContext : DbContext
         try
         {
             this.Database.Migrate();
-            
+
+
             // TODO: Or, use Database.EnsureCreated() instead:
             // this.Database.EnsureCreated();
         }

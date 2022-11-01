@@ -1,14 +1,12 @@
 namespace CyberForceWeb.Data.Models;
-
+using IntelliTect.Coalesce.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 #nullable disable
-
-public class ApplicationUser
+public class ApplicationUser : IdentityUser
 {
-    public int ApplicationUserId { get; set; }
 
     public string Name { get; set; }
-
+    public ApplicationUser() { }
 #nullable restore
-
 
 }
