@@ -27,7 +27,6 @@ jobs:
           cd ./CyberForceWeb.Web
           npm ci
           npm run build
-        shell: pwsh
           
       - name: Build and Restore with dotnet
         run: dotnet build --configuration Release
