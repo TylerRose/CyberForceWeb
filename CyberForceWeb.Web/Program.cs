@@ -25,6 +25,8 @@ builder.Logging
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddEnvironmentVariables();
+builder.WebHost.UseUrls("http://10.0.67.79:80;https://10.0.67.79:443");
+
 
 #region Configure Services
 
