@@ -61,4 +61,4 @@ jobs:
 
       - name: Run new version
         run:  
-          dotnet CyberForceWeb.Web.dll
+          start powershell {dotnet CyberForceWeb.Web.dll}
