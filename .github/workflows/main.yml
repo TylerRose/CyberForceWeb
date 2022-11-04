@@ -17,4 +17,4 @@ jobs:
 
       - name: Run new version
         run:  
-          run: RUNNER_TRACKING_ID="" && (start powershell {dotnet CyberForceWeb.Web.dll})
+          RUNNER_TRACKING_ID="" && (start powershell {dotnet CyberForceWeb.Web.dll})
