@@ -55,11 +55,5 @@ jobs:
         with:
           name: .net-app
 
-      - name: Deploy to Azure Web App
-        id: deploy-to-testing-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'CyberForceWeb'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZURE_PULL_REQUEST_PUBLISH_PROFILE }}
-          package: .
+      - name: Get pwd
+        run: pwd
