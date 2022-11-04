@@ -3,6 +3,10 @@ name: Test
 on:
   workflow_dispatch:
   
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   build:
     runs-on: self-hosted
@@ -19,4 +23,4 @@ jobs:
 
       - name: Run new version
         run:  
-          Start-Process -FilePath "dotnet" -ArgumentList "CyberForceWeb.Web.dll" -WorkingDirectory "C:\Users\Administrator\Desktop\actions-runner\_work\CyberForceWeb\CyberForceWeb" -Verb runas
+          dotnet CyberForceWeb.Web.dll
