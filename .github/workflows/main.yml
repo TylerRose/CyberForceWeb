@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: self-hosted
     env:
-      ACTIONS_RUNNER_HOOK_JOB_COMPLETED: C:\start.ps1
+      ACTIONS_RUNNER_HOOK_JOB_COMPLETED: C:/start.ps1
     environment:
       name: 'Pull Request'
       url: ${{ steps.deploy-to-testing-webapp.outputs.webapp-url }}
