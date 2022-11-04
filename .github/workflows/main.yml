@@ -17,3 +17,6 @@ jobs:
         run:  
           Get-Process | foreach{$processVar = $_;$_.Modules | foreach{if($_.FileName -eq ((get-location).path + "\CyberForceWeb.Web.dll")){taskkill /F /PID $processVar.id}}}
 
+      - name: Run new version
+        run:  
+          Start-Process -FilePath "dotnet" -ArgumentList "CyberForceWeb.Web.dll" -WorkingDirectory "C:\Users\Administrator\Desktop\actions-runner\_work\CyberForceWeb\CyberForceWeb" -Verb runas
