@@ -3,9 +3,9 @@ name: Test
 on:
   workflow_dispatch:
   
-  deployment:
+jobs:
+  build:
     runs-on: self-hosted
-    needs: build
     environment:
       name: 'Pull Request'
       url: ${{ steps.deploy-to-testing-webapp.outputs.webapp-url }}
