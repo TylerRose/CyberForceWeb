@@ -3,6 +3,10 @@ name: Deploy Pull Requests for Testing
 on:
   workflow_dispatch:
 
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -60,5 +64,5 @@ jobs:
           name: .net-app
 
       - name: Run new version
-        run:  
-          start powershell {dotnet CyberForceWeb.Web.dll}
+        run:
+          dotnet CyberForceWeb.Web.dll
