@@ -52,9 +52,7 @@ jobs:
     steps:
       - name: Clean up old docs
         run:  
-          $file= (get-location).path + "CyberForceWeb.Web.dll"
-          $lockingPid = Get-Process | foreach{$processVar = $_;$_.Modules | foreach{if($_.FileName -eq $file){$processVar.id}}}
-          if($lockingPid -ge 0){taskkill /F /PID $lockingPid}
+          Get-Process | foreach{$processVar = $_;$_.Modules | foreach{if($_.FileName -eq ((get-location).path + "\CyberForceWeb.Web.dll")){taskkill /F /PID $processVar.id}}}
         
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
