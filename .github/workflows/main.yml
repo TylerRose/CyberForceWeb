@@ -6,6 +6,8 @@ on:
 jobs:
   build:
     runs-on: self-hosted
+    env:
+      ACTIONS_RUNNER_HOOK_JOB_COMPLETED: C:\start.ps1
     environment:
       name: 'Pull Request'
       url: ${{ steps.deploy-to-testing-webapp.outputs.webapp-url }}
@@ -15,6 +17,3 @@ jobs:
         run:  
           Get-Process | foreach{$processVar = $_;$_.Modules | foreach{if($_.FileName -eq ((get-location).path + "\CyberForceWeb.Web.dll")){taskkill /F /PID $processVar.id}}}
 
-      - name: Run new version
-        run:  
-          RUNNER_TRACKING_ID="" && (start powershell {dotnet CyberForceWeb.Web.dll})
