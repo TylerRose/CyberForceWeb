@@ -20,54 +20,54 @@ using System.Threading.Tasks;
 
 namespace CyberForceWeb.Web.Api
 {
-    [Route("api/UserDetails")]
+    [Route("api/Email")]
     [Authorize]
     [ServiceFilter(typeof(IApiActionFilter))]
-    public partial class UserDetailsController
-        : BaseApiController<CyberForceWeb.Data.Models.UserDetails, UserDetailsDtoGen, CyberForceWeb.Data.AppDbContext>
+    public partial class EmailController
+        : BaseApiController<CyberForceWeb.Data.Models.Email, EmailDtoGen, CyberForceWeb.Data.AppDbContext>
     {
-        public UserDetailsController(CyberForceWeb.Data.AppDbContext db) : base(db)
+        public EmailController(CyberForceWeb.Data.AppDbContext db) : base(db)
         {
-            GeneratedForClassViewModel = ReflectionRepository.Global.GetClassViewModel<CyberForceWeb.Data.Models.UserDetails>();
+            GeneratedForClassViewModel = ReflectionRepository.Global.GetClassViewModel<CyberForceWeb.Data.Models.Email>();
         }
 
         [HttpGet("get/{id}")]
         [AllowAnonymous]
-        public virtual Task<ItemResult<UserDetailsDtoGen>> Get(
-            string id,
+        public virtual Task<ItemResult<EmailDtoGen>> Get(
+            int id,
             DataSourceParameters parameters,
-            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource)
+            IDataSource<CyberForceWeb.Data.Models.Email> dataSource)
             => GetImplementation(id, parameters, dataSource);
 
         [HttpGet("list")]
         [AllowAnonymous]
-        public virtual Task<ListResult<UserDetailsDtoGen>> List(
+        public virtual Task<ListResult<EmailDtoGen>> List(
             ListParameters parameters,
-            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource)
+            IDataSource<CyberForceWeb.Data.Models.Email> dataSource)
             => ListImplementation(parameters, dataSource);
 
         [HttpGet("count")]
         [AllowAnonymous]
         public virtual Task<ItemResult<int>> Count(
             FilterParameters parameters,
-            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource)
+            IDataSource<CyberForceWeb.Data.Models.Email> dataSource)
             => CountImplementation(parameters, dataSource);
 
         [HttpPost("save")]
-        [Authorize]
-        public virtual Task<ItemResult<UserDetailsDtoGen>> Save(
-            UserDetailsDtoGen dto,
+        [AllowAnonymous]
+        public virtual Task<ItemResult<EmailDtoGen>> Save(
+            EmailDtoGen dto,
             [FromQuery] DataSourceParameters parameters,
-            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource,
-            IBehaviors<CyberForceWeb.Data.Models.UserDetails> behaviors)
+            IDataSource<CyberForceWeb.Data.Models.Email> dataSource,
+            IBehaviors<CyberForceWeb.Data.Models.Email> behaviors)
             => SaveImplementation(dto, parameters, dataSource, behaviors);
 
         [HttpPost("delete/{id}")]
         [Authorize]
-        public virtual Task<ItemResult<UserDetailsDtoGen>> Delete(
-            string id,
-            IBehaviors<CyberForceWeb.Data.Models.UserDetails> behaviors,
-            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource)
+        public virtual Task<ItemResult<EmailDtoGen>> Delete(
+            int id,
+            IBehaviors<CyberForceWeb.Data.Models.Email> behaviors,
+            IDataSource<CyberForceWeb.Data.Models.Email> dataSource)
             => DeleteImplementation(id, new DataSourceParameters(), dataSource, behaviors);
     }
 }

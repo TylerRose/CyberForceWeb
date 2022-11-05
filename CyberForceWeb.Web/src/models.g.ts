@@ -38,6 +38,80 @@ export class ApplicationUser {
 }
 
 
+export interface ContactUsForm extends Model<typeof metadata.ContactUsForm> {
+  contactUsFormId: number | null
+  name: string | null
+  email: string | null
+  phoneNumber: string | null
+  fileUploadId: number | null
+  upload: FileUpload | null
+}
+export class ContactUsForm {
+  
+  /** Mutates the input object and its descendents into a valid ContactUsForm implementation. */
+  static convert(data?: Partial<ContactUsForm>): ContactUsForm {
+    return convertToModel(data || {}, metadata.ContactUsForm) 
+  }
+  
+  /** Maps the input object and its descendents to a new, valid ContactUsForm implementation. */
+  static map(data?: Partial<ContactUsForm>): ContactUsForm {
+    return mapToModel(data || {}, metadata.ContactUsForm) 
+  }
+  
+  /** Instantiate a new ContactUsForm, optionally basing it on the given data. */
+  constructor(data?: Partial<ContactUsForm> | {[k: string]: any}) {
+      Object.assign(this, ContactUsForm.map(data || {}));
+  }
+}
+
+
+export interface Email extends Model<typeof metadata.Email> {
+  emailId: number | null
+  senderName: string | null
+  senderEmailAddress: string | null
+}
+export class Email {
+  
+  /** Mutates the input object and its descendents into a valid Email implementation. */
+  static convert(data?: Partial<Email>): Email {
+    return convertToModel(data || {}, metadata.Email) 
+  }
+  
+  /** Maps the input object and its descendents to a new, valid Email implementation. */
+  static map(data?: Partial<Email>): Email {
+    return mapToModel(data || {}, metadata.Email) 
+  }
+  
+  /** Instantiate a new Email, optionally basing it on the given data. */
+  constructor(data?: Partial<Email> | {[k: string]: any}) {
+      Object.assign(this, Email.map(data || {}));
+  }
+}
+
+
+export interface FileUpload extends Model<typeof metadata.FileUpload> {
+  fileUploadId: number | null
+  content: string | null
+}
+export class FileUpload {
+  
+  /** Mutates the input object and its descendents into a valid FileUpload implementation. */
+  static convert(data?: Partial<FileUpload>): FileUpload {
+    return convertToModel(data || {}, metadata.FileUpload) 
+  }
+  
+  /** Maps the input object and its descendents to a new, valid FileUpload implementation. */
+  static map(data?: Partial<FileUpload>): FileUpload {
+    return mapToModel(data || {}, metadata.FileUpload) 
+  }
+  
+  /** Instantiate a new FileUpload, optionally basing it on the given data. */
+  constructor(data?: Partial<FileUpload> | {[k: string]: any}) {
+      Object.assign(this, FileUpload.map(data || {}));
+  }
+}
+
+
 export interface UserDetails extends Model<typeof metadata.UserDetails> {
   id: string | null
 }

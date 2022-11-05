@@ -1,7 +1,9 @@
 using IntelliTect.Coalesce;
+using IntelliTect.Coalesce.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
 namespace CyberForceWeb.Data.Models;
+[Read(SecurityPermissionLevels.AllowAll)]
 [Coalesce]
 public class UserDetails
 {

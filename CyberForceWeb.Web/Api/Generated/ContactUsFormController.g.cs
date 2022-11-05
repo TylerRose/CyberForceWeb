@@ -20,54 +20,54 @@ using System.Threading.Tasks;
 
 namespace CyberForceWeb.Web.Api
 {
-    [Route("api/UserDetails")]
+    [Route("api/ContactUsForm")]
     [Authorize]
     [ServiceFilter(typeof(IApiActionFilter))]
-    public partial class UserDetailsController
-        : BaseApiController<CyberForceWeb.Data.Models.UserDetails, UserDetailsDtoGen, CyberForceWeb.Data.AppDbContext>
+    public partial class ContactUsFormController
+        : BaseApiController<CyberForceWeb.Data.Models.ContactUsForm, ContactUsFormDtoGen, CyberForceWeb.Data.AppDbContext>
     {
-        public UserDetailsController(CyberForceWeb.Data.AppDbContext db) : base(db)
+        public ContactUsFormController(CyberForceWeb.Data.AppDbContext db) : base(db)
         {
-            GeneratedForClassViewModel = ReflectionRepository.Global.GetClassViewModel<CyberForceWeb.Data.Models.UserDetails>();
+            GeneratedForClassViewModel = ReflectionRepository.Global.GetClassViewModel<CyberForceWeb.Data.Models.ContactUsForm>();
         }
 
         [HttpGet("get/{id}")]
         [AllowAnonymous]
-        public virtual Task<ItemResult<UserDetailsDtoGen>> Get(
-            string id,
+        public virtual Task<ItemResult<ContactUsFormDtoGen>> Get(
+            int id,
             DataSourceParameters parameters,
-            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource)
+            IDataSource<CyberForceWeb.Data.Models.ContactUsForm> dataSource)
             => GetImplementation(id, parameters, dataSource);
 
         [HttpGet("list")]
         [AllowAnonymous]
-        public virtual Task<ListResult<UserDetailsDtoGen>> List(
+        public virtual Task<ListResult<ContactUsFormDtoGen>> List(
             ListParameters parameters,
-            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource)
+            IDataSource<CyberForceWeb.Data.Models.ContactUsForm> dataSource)
             => ListImplementation(parameters, dataSource);
 
         [HttpGet("count")]
         [AllowAnonymous]
         public virtual Task<ItemResult<int>> Count(
             FilterParameters parameters,
-            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource)
+            IDataSource<CyberForceWeb.Data.Models.ContactUsForm> dataSource)
             => CountImplementation(parameters, dataSource);
 
         [HttpPost("save")]
-        [Authorize]
-        public virtual Task<ItemResult<UserDetailsDtoGen>> Save(
-            UserDetailsDtoGen dto,
+        [AllowAnonymous]
+        public virtual Task<ItemResult<ContactUsFormDtoGen>> Save(
+            ContactUsFormDtoGen dto,
             [FromQuery] DataSourceParameters parameters,
-            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource,
-            IBehaviors<CyberForceWeb.Data.Models.UserDetails> behaviors)
+            IDataSource<CyberForceWeb.Data.Models.ContactUsForm> dataSource,
+            IBehaviors<CyberForceWeb.Data.Models.ContactUsForm> behaviors)
             => SaveImplementation(dto, parameters, dataSource, behaviors);
 
         [HttpPost("delete/{id}")]
         [Authorize]
-        public virtual Task<ItemResult<UserDetailsDtoGen>> Delete(
-            string id,
-            IBehaviors<CyberForceWeb.Data.Models.UserDetails> behaviors,
-            IDataSource<CyberForceWeb.Data.Models.UserDetails> dataSource)
+        public virtual Task<ItemResult<ContactUsFormDtoGen>> Delete(
+            int id,
+            IBehaviors<CyberForceWeb.Data.Models.ContactUsForm> behaviors,
+            IDataSource<CyberForceWeb.Data.Models.ContactUsForm> dataSource)
             => DeleteImplementation(id, new DataSourceParameters(), dataSource, behaviors);
     }
 }

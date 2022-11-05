@@ -24,7 +24,7 @@ public class LoginService : ILoginService
     public async Task<ItemResult> Login(string email, string password)
     {
         SignInResult? result = await SignInManager.PasswordSignInAsync(email, password, false, false);
-
+        
         if (result.Succeeded)
         {
             return true;

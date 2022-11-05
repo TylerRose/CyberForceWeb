@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using CyberForceWeb.Data.Models;
 using IntelliTect.Coalesce;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using CoalesceSample.Data.Services;
+using System.Security.Claims;
 
 namespace CyberForceWeb.Data;
 
@@ -9,9 +11,20 @@ namespace CyberForceWeb.Data;
 public class AppDbContext : IdentityDbContext<ApplicationUser>
 {
     public DbSet<UserDetails> UserDetails => Set<UserDetails>();
-
+    public DbSet<ContactUsForm> ContactUsForms => Set<ContactUsForm>();
+    public DbSet<Email> Emails => Set<Email>();
+    public DbSet<FileUpload> FileUploads => Set<FileUpload>();
+   
     public AppDbContext()
     {
+    }
+
+    public IScopedOperationContext OperationContext { get; set; }
+    public ClaimsPrincipal? User => OperationContext.User;
+
+    public AppDbContext(IScopedOperationContext operationContext, DbContextOptions<AppDbContext> options) : base(options)
+    {
+        OperationContext = operationContext;
     }
 
     public AppDbContext(DbContextOptions options) : base(options)

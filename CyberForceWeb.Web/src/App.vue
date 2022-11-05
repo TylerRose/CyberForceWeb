@@ -37,6 +37,18 @@
         </router-link>
       </v-toolbar-title>
 
+      <v-toolbar-title
+        v-if="$userRoles && $userRoles.includes('SuperAdmin')"
+        class="px-4"
+      >
+        <router-link
+          to="/Admin"
+          style="text-decoration: none"
+          class="white--text"
+        >
+          <v-btn class="pa-8" outlined> Login</v-btn>
+        </router-link>
+      </v-toolbar-title>
       <v-toolbar-title class="px-4">
         <router-link
           to="/Login"
@@ -109,6 +121,7 @@ import { Component } from "vue-property-decorator";
 export default class App extends Vue {
   drawer: boolean | null = null;
   routeComponent: Vue | null = null;
+
   get routeMeta() {
     if (!this.$route || this.$route.name === null) return null;
 

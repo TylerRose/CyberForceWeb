@@ -13,6 +13,8 @@ using CyberForceWeb.Data.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using CyberForceWeb.Data.Identity;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
@@ -26,7 +28,7 @@ builder.Logging
     // Filter out Request Starting/Request Finished noise:
     .AddFilter<ConsoleLoggerProvider>("Microsoft.AspNetCore.Hosting.Diagnostics", LogLevel.Warning);
 
-builder.Configuration
+builder.Configuration 
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddEnvironmentVariables();
 
@@ -55,6 +57,7 @@ services.AddDbContext<AppDbContext>(options =>
 
 services.AddScoped<ILoginService, LoginService>();
 services.AddScoped<IApplicationUserService, ApplicationUserService>();
+services.AddScoped<UploadService>();
 
 services.AddCoalesce<AppDbContext>();
 
@@ -162,10 +165,10 @@ if (app.Environment.IsDevelopment())
     // This exists only because Coalesce restricts all generated pages and API to only logged in users by default.
     app.Use(async (context, next) =>
     {
-//         Claim[] claims = new[] { new Claim(ClaimTypes.Name, "developmentuser") };
-//
-//         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-//         await context.SignInAsync(context.User = new ClaimsPrincipal(identity));
+        Claim[] claims = new[] { new Claim(ClaimTypes.Name, "user") };
+
+        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        await context.SignInAsync(context.User = new ClaimsPrincipal(identity));
 
         await next.Invoke();
     });
@@ -267,14 +270,18 @@ using (var scope = app.Services.CreateScope())
             Email = "plank",
             UserName = "plank",
         };
-        db.Users.Add(adminAccount);
+        db.Users.Add(bobUser);
+        db.Users.Add(clemUser);
+        db.Users.Add(aliciaUser);
+        db.Users.Add(sueUser);
+        db.Users.Add(plankAdmin);
         db.SaveChanges();
         UserManager<ApplicationUser>? userManager = serviceScope.GetService<UserManager<ApplicationUser>>();
         if (userManager != null)
         {
-            await userManager.CreateAsync(adminAccount, "Blueteam2022");
-            await userManager.AddToRoleAsync(adminAccount, Roles.User);
-            await userManager.AddToRoleAsync(adminAccount, Roles.SuperAdmin);
+            //await userManager.CreateAsync(adminAccount, "Blueteam2022!");
+            //await userManager.AddToRoleAsync(adminAccount, Roles.User);
+            //await userManager.AddToRoleAsync(adminAccount, Roles.SuperAdmin);
             await userManager.CreateAsync(bobUser, "sjhd76eww!");
             await userManager.AddToRoleAsync(bobUser, Roles.User);
             await userManager.CreateAsync(clemUser, "khsd54#h");

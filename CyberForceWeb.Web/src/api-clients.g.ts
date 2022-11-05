@@ -8,6 +8,21 @@ export class ApplicationUserApiClient extends ModelApiClient<$models.Application
 }
 
 
+export class ContactUsFormApiClient extends ModelApiClient<$models.ContactUsForm> {
+  constructor() { super($metadata.ContactUsForm) }
+}
+
+
+export class EmailApiClient extends ModelApiClient<$models.Email> {
+  constructor() { super($metadata.Email) }
+}
+
+
+export class FileUploadApiClient extends ModelApiClient<$models.FileUpload> {
+  constructor() { super($metadata.FileUpload) }
+}
+
+
 export class UserDetailsApiClient extends ModelApiClient<$models.UserDetails> {
   constructor() { super($metadata.UserDetails) }
 }
@@ -113,6 +128,27 @@ export class LoginServiceApiClient extends ServiceApiClient<typeof $metadata.Log
   public getUserInfo($config?: AxiosRequestConfig): AxiosPromise<ItemResult<$models.UserInfoDto>> {
     const $method = this.$metadata.methods.getUserInfo
     const $params =  {
+    }
+    return this.$invoke($method, $params, $config)
+  }
+  
+}
+
+
+export class UploadServiceApiClient extends ServiceApiClient<typeof $metadata.UploadService> {
+  constructor() { super($metadata.UploadService) }
+  public test($config?: AxiosRequestConfig): AxiosPromise<ItemResult<void>> {
+    const $method = this.$metadata.methods.test
+    const $params =  {
+    }
+    return this.$invoke($method, $params, $config)
+  }
+  
+  public uploadFile(file: File | null, formId: number | null, $config?: AxiosRequestConfig): AxiosPromise<ItemResult<$models.FileUpload>> {
+    const $method = this.$metadata.methods.uploadFile
+    const $params =  {
+      file,
+      formId,
     }
     return this.$invoke($method, $params, $config)
   }

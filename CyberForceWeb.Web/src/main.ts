@@ -17,6 +17,7 @@ import $metadata from "@/metadata.g";
 // viewmodels.g has side effects - it populates the global lookup on ViewModel and ListViewModel.
 // This global lookup allows the admin page components to function.
 import "@/viewmodels.g";
+import applicationUserService from '@/services/UserService';
 
 // SETUP: vuetify
 Vue.use(Vuetify);
@@ -56,6 +57,10 @@ Vue.use(CoalesceVuetify, {
 
 Vue.config.productionTip = false;
 
+router.beforeEach(async (to, from, next) => {
+  await applicationUserService.getRoles();
+  next();
+});
 new Vue({
   router,
   vuetify,

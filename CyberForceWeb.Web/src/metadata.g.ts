@@ -119,6 +119,123 @@ export const ApplicationUser = domain.types.ApplicationUser = {
   dataSources: {
   },
 }
+export const ContactUsForm = domain.types.ContactUsForm = {
+  name: "ContactUsForm",
+  displayName: "Contact Us Form",
+  get displayProp() { return this.props.name }, 
+  type: "model",
+  controllerRoute: "ContactUsForm",
+  get keyProp() { return this.props.contactUsFormId }, 
+  behaviorFlags: 7,
+  props: {
+    contactUsFormId: {
+      name: "contactUsFormId",
+      displayName: "Contact Us Form Id",
+      type: "number",
+      role: "primaryKey",
+      hidden: 3,
+    },
+    name: {
+      name: "name",
+      displayName: "Name",
+      type: "string",
+      role: "value",
+    },
+    email: {
+      name: "email",
+      displayName: "Email",
+      type: "string",
+      role: "value",
+    },
+    phoneNumber: {
+      name: "phoneNumber",
+      displayName: "Phone Number",
+      type: "string",
+      role: "value",
+    },
+    fileUploadId: {
+      name: "fileUploadId",
+      displayName: "File Upload Id",
+      type: "number",
+      role: "value",
+    },
+    upload: {
+      name: "upload",
+      displayName: "Upload",
+      type: "model",
+      get typeDef() { return (domain.types.FileUpload as ModelType) },
+      role: "value",
+      dontSerialize: true,
+    },
+  },
+  methods: {
+  },
+  dataSources: {
+  },
+}
+export const Email = domain.types.Email = {
+  name: "Email",
+  displayName: "Email",
+  get displayProp() { return this.props.emailId }, 
+  type: "model",
+  controllerRoute: "Email",
+  get keyProp() { return this.props.emailId }, 
+  behaviorFlags: 7,
+  props: {
+    emailId: {
+      name: "emailId",
+      displayName: "Email Id",
+      type: "number",
+      role: "primaryKey",
+      hidden: 3,
+    },
+    senderName: {
+      name: "senderName",
+      displayName: "Sender Name",
+      type: "string",
+      role: "value",
+    },
+    senderEmailAddress: {
+      name: "senderEmailAddress",
+      displayName: "Sender Email Address",
+      type: "string",
+      role: "value",
+    },
+  },
+  methods: {
+  },
+  dataSources: {
+  },
+}
+export const FileUpload = domain.types.FileUpload = {
+  name: "FileUpload",
+  displayName: "File Upload",
+  get displayProp() { return this.props.fileUploadId }, 
+  type: "model",
+  controllerRoute: "FileUpload",
+  get keyProp() { return this.props.fileUploadId }, 
+  behaviorFlags: 7,
+  props: {
+    fileUploadId: {
+      name: "fileUploadId",
+      displayName: "File Upload Id",
+      type: "number",
+      role: "primaryKey",
+      hidden: 3,
+    },
+    content: {
+      name: "content",
+      displayName: "Content",
+      type: "binary",
+      base64: true,
+      role: "value",
+    },
+  },
+  methods: {
+  },
+  dataSources: {
+  },
+}
 export const UserDetails = domain.types.UserDetails = {
   name: "UserDetails",
   displayName: "User Details",
@@ -456,18 +573,71 @@ export const LoginService = domain.services.LoginService = {
     },
   },
 }
+export const UploadService = domain.services.UploadService = {
+  name: "UploadService",
+  displayName: "Upload Service",
+  type: "service",
+  controllerRoute: "UploadService",
+  methods: {
+    test: {
+      name: "test",
+      displayName: "Test",
+      transportType: "item",
+      httpMethod: "POST",
+      params: {
+      },
+      return: {
+        name: "$return",
+        displayName: "Result",
+        type: "void",
+        role: "value",
+      },
+    },
+    uploadFile: {
+      name: "uploadFile",
+      displayName: "Upload File",
+      transportType: "item",
+      httpMethod: "POST",
+      params: {
+        file: {
+          name: "file",
+          displayName: "File",
+          type: "file",
+          role: "value",
+        },
+        formId: {
+          name: "formId",
+          displayName: "Form Id",
+          type: "number",
+          role: "value",
+        },
+      },
+      return: {
+        name: "$return",
+        displayName: "Result",
+        type: "model",
+        get typeDef() { return (domain.types.FileUpload as ModelType) },
+        role: "value",
+      },
+    },
+  },
+}
 
 interface AppDomain extends Domain {
   enums: {
   }
   types: {
     ApplicationUser: typeof ApplicationUser
+    ContactUsForm: typeof ContactUsForm
+    Email: typeof Email
+    FileUpload: typeof FileUpload
     UserDetails: typeof UserDetails
     UserInfoDto: typeof UserInfoDto
   }
   services: {
     ApplicationUserService: typeof ApplicationUserService
     LoginService: typeof LoginService
+    UploadService: typeof UploadService
   }
 }
 

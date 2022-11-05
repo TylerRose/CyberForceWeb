@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CyberForceWeb.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221101051640_setup")]
-    partial class setup
+    [Migration("20221105154216_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -90,6 +90,74 @@ namespace CyberForceWeb.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("CyberForceWeb.Data.Models.ContactUsForm", b =>
+                {
+                    b.Property<int>("ContactUsFormId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactUsFormId"), 1L, 1);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FileUploadId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ContactUsFormId");
+
+                    b.HasIndex("FileUploadId");
+
+                    b.ToTable("ContactUsForms");
+                });
+
+            modelBuilder.Entity("CyberForceWeb.Data.Models.Email", b =>
+                {
+                    b.Property<int>("EmailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmailId"), 1L, 1);
+
+                    b.Property<string>("SenderEmailAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EmailId");
+
+                    b.ToTable("Emails");
+                });
+
+            modelBuilder.Entity("CyberForceWeb.Data.Models.FileUpload", b =>
+                {
+                    b.Property<int>("FileUploadId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FileUploadId"), 1L, 1);
+
+                    b.Property<byte[]>("Content")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("FileUploadId");
+
+                    b.ToTable("FileUploads");
                 });
 
             modelBuilder.Entity("CyberForceWeb.Data.Models.UserDetails", b =>
@@ -233,6 +301,16 @@ namespace CyberForceWeb.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("CyberForceWeb.Data.Models.ContactUsForm", b =>
+                {
+                    b.HasOne("CyberForceWeb.Data.Models.FileUpload", "Upload")
+                        .WithMany()
+                        .HasForeignKey("FileUploadId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Upload");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
