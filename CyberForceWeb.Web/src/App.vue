@@ -46,7 +46,7 @@
           style="text-decoration: none"
           class="white--text"
         >
-          <v-btn class="pa-8" outlined> Login</v-btn>
+          <v-btn class="pa-8" outlined> Admin</v-btn>
         </router-link>
       </v-toolbar-title>
       <v-toolbar-title class="px-4">

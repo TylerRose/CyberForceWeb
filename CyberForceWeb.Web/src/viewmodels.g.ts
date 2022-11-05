@@ -84,6 +84,7 @@ export class EmailListViewModel extends ListViewModel<$models.Email, $apiClients
 
 export interface FileUploadViewModel extends $models.FileUpload {
   fileUploadId: number | null;
+  fileName: string | null;
   content: string | null;
 }
 export class FileUploadViewModel extends ViewModel<$models.FileUpload, $apiClients.FileUploadApiClient, number> implements $models.FileUpload  {

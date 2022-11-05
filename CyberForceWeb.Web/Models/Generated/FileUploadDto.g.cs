@@ -13,12 +13,18 @@ namespace CyberForceWeb.Web.Models
         public FileUploadDtoGen() { }
 
         private int? _FileUploadId;
+        private string _FileName;
         private byte[] _Content;
 
         public int? FileUploadId
         {
             get => _FileUploadId;
             set { _FileUploadId = value; Changed(nameof(FileUploadId)); }
+        }
+        public string FileName
+        {
+            get => _FileName;
+            set { _FileName = value; Changed(nameof(FileName)); }
         }
         public byte[] Content
         {
@@ -37,6 +43,7 @@ namespace CyberForceWeb.Web.Models
             // Fill the properties of the object.
 
             this.FileUploadId = obj.FileUploadId;
+            this.FileName = obj.FileName;
             this.Content = obj.Content;
         }
 
@@ -50,6 +57,7 @@ namespace CyberForceWeb.Web.Models
             if (OnUpdate(entity, context)) return;
 
             if (ShouldMapTo(nameof(FileUploadId))) entity.FileUploadId = (FileUploadId ?? entity.FileUploadId);
+            if (ShouldMapTo(nameof(FileName))) entity.FileName = FileName;
             if (ShouldMapTo(nameof(Content))) entity.Content = Content;
         }
     }

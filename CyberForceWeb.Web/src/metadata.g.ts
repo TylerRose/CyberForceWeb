@@ -223,6 +223,12 @@ export const FileUpload = domain.types.FileUpload = {
       role: "primaryKey",
       hidden: 3,
     },
+    fileName: {
+      name: "fileName",
+      displayName: "File Name",
+      type: "string",
+      role: "value",
+    },
     content: {
       name: "content",
       displayName: "Content",

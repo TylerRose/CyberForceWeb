@@ -11,5 +11,6 @@ namespace CyberForceWeb.Data.Models;
 public class FileUpload
 {
     public int FileUploadId { get; set; }
+    public string FileName { get; set; }
     public byte[] Content { get; set; }
 }

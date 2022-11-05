@@ -32,6 +32,11 @@ export default new Router({
       name: "home",
       component: () => import("./views/Login.vue"),
     },
+    {
+      path: "/Admin",
+      name: "home",
+      component: () => import("./views/Admin.vue"),
+    },
 
     // Coalesce admin routes
     {

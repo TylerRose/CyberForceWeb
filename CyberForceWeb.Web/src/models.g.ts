@@ -91,6 +91,7 @@ export class Email {
 
 export interface FileUpload extends Model<typeof metadata.FileUpload> {
   fileUploadId: number | null
+  fileName: string | null
   content: string | null
 }
 export class FileUpload {

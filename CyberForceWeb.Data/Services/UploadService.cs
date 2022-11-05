@@ -40,6 +40,7 @@ public class UploadService
 
         FileUpload upload = new FileUpload();
         upload.Content = content;
+        upload.FileName = file?.Name ?? "Unknown File";
 
         Db.Add(upload);
         Db.SaveChanges();
