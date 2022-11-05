@@ -173,7 +173,7 @@ if (app.Environment.IsDevelopment())
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             await context.SignInAsync(context.User = new ClaimsPrincipal(identity));
         }
-        await next.Invoke();
+        await next();//.Invoke();
     });
     // End Dummy Authentication.
 }
@@ -199,6 +199,14 @@ app.Use(async (context, next) =>
 {
     context.Response.GetTypedHeaders().CacheControl =
         new CacheControlHeaderValue { NoCache = true, NoStore = true, };
+    Claim[] claims = new[] { new Claim(ClaimTypes.Name, "anon") };
+    string? name = context.User?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+
+    if (name is null || name == "anon")
+    {
+        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        await context.SignInAsync(context.User = new ClaimsPrincipal(identity));
+    }
 
     await next();
 });
