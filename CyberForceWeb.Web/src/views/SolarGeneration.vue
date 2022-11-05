@@ -1,9 +1,14 @@
 <template>
   <v-row align="center">
-    <v-sheet color="green lighten-2">
+    <v-sheet color="green lighten-2" class="ma-10">
       <v-card>
-        <v-row align="center">
-          <v-card-title> Solar Generation</v-card-title>
+        <v-row align="center" justify="center">
+          <v-card class="text-center">
+            <v-card-title>
+              <v-spacer />
+              Solar Generation
+              <v-spacer />
+            </v-card-title>
           <v-card-text>
             We are proud of being the newest addition to the Vita Vehiculum
             family and support their manufacturing capabilities with over 15
@@ -14,6 +19,7 @@
             via the Contact Us page for more information regarding commercial
             utilization.
           </v-card-text>
+          </v-card>
         </v-row>
       </v-card>
     </v-sheet>

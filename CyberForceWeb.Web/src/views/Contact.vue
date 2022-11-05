@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-row justify="center">
-      <v-sheet color="green lighten-3" height="400">
+      <v-sheet color="green lighten-3" height="400" >
         <v-img
           width="1000"
           aspect-ratio="1"
@@ -10,12 +10,13 @@
         />
       </v-sheet>
     </v-row>
-    <v-row justify="center" class="pa-3">
-      <v-card height="400" width="800">
+    <v-row justify="center" class="pa-3 text-center">
+      <v-card height="450" width="800">
         <v-row class="pa-2">
           <v-col>
             <v-row justify="center">
-              <v-card-title> Contact Information</v-card-title>
+              <v-card-title> Contact Information
+              </v-card-title>
               <v-card-text>
                 Welcome to Sole-Zon-Solis Energy, we are happy to answer any
                 questions you might have about our services. Please fill out the
