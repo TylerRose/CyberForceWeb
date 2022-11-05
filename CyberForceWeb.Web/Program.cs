@@ -165,11 +165,14 @@ if (app.Environment.IsDevelopment())
     // This exists only because Coalesce restricts all generated pages and API to only logged in users by default.
     app.Use(async (context, next) =>
     {
-        Claim[] claims = new[] { new Claim(ClaimTypes.Name, "user") };
+        Claim[] claims = new[] { new Claim(ClaimTypes.Name, "anon") };
+        string? name = context.User?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
 
-        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-        await context.SignInAsync(context.User = new ClaimsPrincipal(identity));
-
+        if (name is null || name == "anon")
+        {
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            await context.SignInAsync(context.User = new ClaimsPrincipal(identity));
+        }
         await next.Invoke();
     });
     // End Dummy Authentication.

@@ -95,6 +95,12 @@ public class LoginService : ILoginService
     {
         if (user.Identity?.IsAuthenticated ?? false)
         {
+            var name = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+
+            if (name == "anon")
+            {
+                return "You are not signed in";
+            }
             return true;
         }
         else

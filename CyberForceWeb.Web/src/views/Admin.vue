@@ -1,13 +1,11 @@
 <template>
-
+  <v-card> </v-card>
 </template>
 
-<script>
-export default {
-  name: "Admin.vue"
-}
+<script lang="ts">
+import { Vue } from "vue-property-decorator";
+
+export default class Admin extends Vue {}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

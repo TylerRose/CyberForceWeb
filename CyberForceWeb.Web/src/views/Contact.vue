@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-row justify="center">
-      <v-sheet color="green lighten-3" height="400" >
+      <v-sheet color="green lighten-3" height="400">
         <v-img
           width="1000"
           aspect-ratio="1"
@@ -15,8 +15,7 @@
         <v-row class="pa-2">
           <v-col>
             <v-row justify="center">
-              <v-card-title> Contact Information
-              </v-card-title>
+              <v-card-title> Contact Information </v-card-title>
               <v-card-text>
                 Welcome to Sole-Zon-Solis Energy, we are happy to answer any
                 questions you might have about our services. Please fill out the
@@ -51,7 +50,11 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { ContactUsFormViewModel, UploadServiceViewModel, FileUploadViewModel } from "@/viewmodels.g";
+import {
+  ContactUsFormViewModel,
+  UploadServiceViewModel,
+  FileUploadViewModel,
+} from "@/viewmodels.g";
 
 @Component
 export default class Contact extends Vue {

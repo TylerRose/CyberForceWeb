@@ -59,6 +59,7 @@ Vue.config.productionTip = false;
 
 router.beforeEach(async (to, from, next) => {
   await applicationUserService.getRoles();
+  console.log("Before Each");
   next();
 });
 new Vue({

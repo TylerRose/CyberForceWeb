@@ -20,12 +20,7 @@
           <v-card>
             <v-card-title> Login</v-card-title>
             <v-card-text>
-              <v-text-field
-                v-model="email"
-                label="Email"
-                required
-                autofocus
-              />
+              <v-text-field v-model="email" label="Email" required autofocus />
               <v-text-field
                 v-model="password"
                 label="Password"
@@ -34,12 +29,8 @@
               />
             </v-card-text>
             <v-card-actions>
-              <v-spacer/>
-              <v-btn
-                color="primary"
-                :disabled="!isLoggedIn"
-                @click="logout"
-              >
+              <v-spacer />
+              <v-btn color="primary" :disabled="!isLoggedIn" @click="logout">
                 Logout
               </v-btn>
               <v-btn
@@ -59,8 +50,8 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
-import {LoginServiceViewModel} from "@/viewmodels.g";
+import { Component, Vue } from "vue-property-decorator";
+import { LoginServiceViewModel } from "@/viewmodels.g";
 
 @Component({})
 export default class Login extends Vue {
@@ -75,8 +66,10 @@ export default class Login extends Vue {
   userName = "";
 
   async created() {
-    await this.loginService.isLoggedIn();
-    await this.loginService.getUserInfo();
+    try {
+      await this.loginService.isLoggedIn().catch();
+      await this.loginService.getUserInfo();
+    } catch (e) {}
     this.isLoggedIn = this.$isLoggedIn;
     this.userName = this.loginService.getUserInfo.result?.name ?? "";
   }
@@ -84,6 +77,7 @@ export default class Login extends Vue {
   async login() {
     await this.logout(false);
     if (this.signInType === "jwt") {
+      console.log("jwt");
       await this.loginService.getToken(this.email, this.password);
       if (this.loginService.getToken.wasSuccessful) {
         localStorage.setItem(
