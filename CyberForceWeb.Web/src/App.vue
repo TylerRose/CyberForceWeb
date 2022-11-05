@@ -62,7 +62,7 @@
       <v-row justify="center" align="center">
         <v-toolbar-title class="px-8">
           <v-sheet width="300" color="grey">
-            <v-img :src="require('@/assets/vitavehiculum.png')"
+            <v-img :src="require('@/assets/vitavehiculum.png')" />
           </v-sheet>
         </v-toolbar-title>
         <v-toolbar-title class="px-8">

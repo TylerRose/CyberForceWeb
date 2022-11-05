@@ -44,22 +44,24 @@ jobs:
   
   deploy-for-testing:
     runs-on: self-hosted
+    concurrency: 
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
     needs: build
     environment:
       name: 'Pull Request'
       url: ${{ steps.deploy-to-testing-webapp.outputs.webapp-url }}
 
     steps:
+      - name: Clean up old docs
+        run:  
+          Get-Process | foreach{$processVar = $_;$_.Modules | foreach{if($_.FileName -eq ((get-location).path + "\CyberForceWeb.Web.dll")){taskkill /F /PID $processVar.id}}}
+        
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
           name: .net-app
 
-      - name: Deploy to Azure Web App
-        id: deploy-to-testing-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'CyberForceWeb'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZURE_PULL_REQUEST_PUBLISH_PROFILE }}
-          package: .
+      - name: Run new version
+        run:
+          dotnet CyberForceWeb.Web.dll
